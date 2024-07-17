@@ -1,0 +1,26 @@
+<div>
+    <h2>Candidature Details</h2>
+    <div>
+      <label>ID:</label> {{ candidature.id }}
+    </div>
+    <div>
+      <label>Niveau d'Étude:</label> {{ candidature.nivEtude }}
+    </div>
+    <div>
+      <label>Établissement:</label> {{ candidature.etablissement }}
+    </div>
+    <div>
+      <label>Spécialité:</label> {{ candidature.specialite }}
+    </div>
+    <div>
+      <label>État:</label> {{ candidature.etatCandidature }}
+    </div>
+    <div>
+      <label>User:</label> {{ candidature.user.username }}
+    </div>
+    <!-- <div>
+      <label>Offres:</label> {{ candidature.offres?.intitule || 'N/A' }}
+    </div> -->
+    <button (click)="goBack()">Back</button>
+  </div>
+  

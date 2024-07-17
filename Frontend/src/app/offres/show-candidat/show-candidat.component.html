@@ -1,0 +1,45 @@
+<div *ngIf="offre" class="container mt-4">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+        <h3 class="card-title">Titre de sujet: {{ offre.intitule }}</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><strong>Niveau d'Étude:</strong> {{ offre.nivEtude }}</p>
+        <p class="card-text"><strong>Type de Stage:</strong> {{ offre.typeStage }}</p>
+        <p class="card-text"><strong>Nombre de Stagiaires:</strong> {{ offre.nb_stagiaires }}</p> 
+        <p class="card-text"><strong>État du Stage:</strong> {{ offre.etatStage }}</p> 
+  
+        <h3 class="mt-4">Candidatures</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped mt-3">
+            <thead class="thead-dark">
+              <tr>
+                <th>Nom de Candidat</th>
+                <th>Email</th>
+                <th>Niveau d'Étude</th>
+                <th>Établissement</th>
+                <th>Spécialité</th>
+                <th>État</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let candidature of offre.candidatures">
+                <td>{{ candidature.user.username }}</td>
+                <td>{{ candidature.user.email }}</td>
+                <td>{{ candidature.nivEtude }}</td>
+                <td>{{ candidature.etablissement }}</td>
+                <td>{{ candidature.specialite }}</td>
+                <td>{{ candidature.etatCandidature }}</td>
+                <td>
+                  <button class="btn btn-success btn-sm" (click)="acceptCandidature(candidature.id)">Accepter</button>
+                  <button class="btn btn-danger btn-sm" (click)="refuseCandidature(candidature.id)">Refuser</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,63 @@
+<div class="container mt-5">
+    <h2 class="text-center">Update Offre</h2>
+    <form *ngIf="offre" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="intitule">Intitule</label>
+        <input type="text" class="form-control" id="intitule" [(ngModel)]="offre.intitule" name="intitule" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="offre.description" name="description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dateDebut">Date Debut</label>
+        <input type="date" class="form-control" id="dateDebut" [(ngModel)]="offre.dateDebut" name="dateDebut" required>
+      </div>
+      <div class="form-group">
+        <label for="dateFin">Date Fin</label>
+        <input type="date" class="form-control" id="dateFin" [(ngModel)]="offre.dateFin" name="dateFin" required>
+      </div>
+      <div class="form-group">
+        <label for="nb_stagiaires">Nombre de Stagiaires</label>
+        <input type="number" class="form-control" id="nb_stagiaires" [(ngModel)]="offre.nb_stagiaires" name="nb_stagiaires" required>
+      </div>
+      <!-- <div class="form-group">
+        <label for="nivEtude">Niveau d'Etude</label>
+        <input type="text" class="form-control" id="nivEtude" [(ngModel)]="offre.nivEtude" name="nivEtude" required>
+      </div>
+      <div class="form-group">
+        <label for="typeStage">Type de Stage</label>
+        <input type="text" class="form-control" id="typeStage" [(ngModel)]="offre.typeStage" name="typeStage" required>
+      </div> -->
+
+      <div class="form-group">
+        <label for="nivEtude">Niveau d'Etude</label>
+        <select class="form-control" id="nivEtude" [(ngModel)]="offre.nivEtude" name="nivEtude" required>
+          <option value="3ème année - cycle ingénieur">3ème année - cycle ingénieur </option>
+          <option value="2ème année - cycle ingénieur">2ème année - cycle ingénieur</option>
+          <option value="1er année - cycle ingénieur">1er année - cycle ingénieur</option>
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="typeStage">Type de Stage</label>
+        <select class="form-control" id="typeStage" [(ngModel)]="offre.typeStage" name="typeStage" required>
+          <option value="Fin d'étude">Projet fin d'étude</option>
+          <option value="Perfectionnement">Stage de perfectionnement</option>
+          <option value="Initiation">Stage d'initiation</option>
+      </select>
+      </div>
+      <!-- <div class="form-group">
+        <label for="etatStage">Etat de Stage</label>
+        <select class="form-control" id="etatStage" [(ngModel)]="offre.etatStage" name="etatStage" required>
+            <option value="Disponible">Disponible</option>
+            <option value="Non Disponible">Non disponible</option>
+        </select>
+    </div> -->
+      <!-- <div class="form-group">
+        <label for="etatStage">Etat de Stage</label>
+        <input type="text" class="form-control" id="etatStage" [(ngModel)]="offre.etatStage" name="etatStage" required>
+      </div> -->
+      <button type="submit" class="btn btn-warning mt-3">Update</button>
+    </form>
+  </div>
+  

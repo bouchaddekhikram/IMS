@@ -1,0 +1,26 @@
+<div>
+    <h2>Update Candidature</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nivEtude">Niveau d'Etude</label>
+        <select class="form-control" id="nivEtude" [(ngModel)]="candidature.nivEtude" name="nivEtude" required>
+          <option value="3ème année - cycle ingénieur">3ème année - cycle ingénieur</option>
+          <option value="2ème année - cycle ingénieur">2ème année - cycle ingénieur</option>
+          <option value="1er année - cycle ingénieur">1er année - cycle ingénieur</option>
+        </select>
+      </div>
+      <div>
+        <label for="etablissement">Établissement:</label>
+        <input type="text" id="etablissement" [(ngModel)]="candidature.etablissement" name="etablissement" required>
+      </div>
+      <div>
+        <label for="specialite">Spécialité:</label>
+        <input type="text" id="specialite" [(ngModel)]="candidature.specialite" name="specialite" required>
+      </div>
+      <div>
+        <label for="etatCandidature">État de la Candidature:</label>
+        <input type="text" id="etatCandidature" [(ngModel)]="candidature.etatCandidature" name="etatCandidature" required>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </div>

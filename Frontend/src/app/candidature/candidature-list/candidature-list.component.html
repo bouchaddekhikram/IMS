@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h2 class="text-center">Candidature List</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Offre</th>
+        <th>Niveau d'Étude</th>
+        <th>Établissement</th>
+        <th>Spécialité</th>
+        <th>État</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidature of candidatures">
+        <td>{{ candidature.id }}</td>
+        <td>{{ candidature.user.username }}</td>
+        <!-- <td>{{ candidature.offres?.id || 'N/A' }}</td> -->
+        <td>{{ candidature.nivEtude }}</td>
+        <td>{{ candidature.etablissement }}</td>
+        <td>{{ candidature.specialite }}</td>
+        <td>{{ candidature.etatCandidature }}</td>
+        <td class="text-center">
+          <button *ngIf="candidature.id" (click)="goToCandidatureUpdate(candidature.id)" class="btn btn-warning btn-sm mr-2">
+            Edit
+          </button>
+          <button *ngIf="candidature.id" (click)="deleteCandidature(candidature.id)" class="btn btn-danger btn-sm">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-4">
+    <button (click)="goToCreateCandidature()" class="btn btn-success">Create Candidature</button>
+  </div>
+</div>
