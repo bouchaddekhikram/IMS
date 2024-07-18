@@ -32,15 +32,6 @@ pipeline {
                 }
             }
         }
-        
-
-        // stage('Test') {
-        //     steps {
-        //         // Run tests using Maven
-        //         sh 'mvn test'
-        //     }
-        // }
-
         stage('Backend - Build Docker Image') {
             steps {
                 // Build Docker image
