@@ -21,18 +21,18 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         checkout scmGit(branches: [[name: '*/wajdi']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/Internship-Management-System']])
-        //     }
-        // }
+           stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
+            }
+        }
 
         stage('Backend - Build') {
             steps {
                 // Build the project using Maven
-                // dir(''){
+                dir('Backend'){
                 sh 'mvn clean package -DskipTests'
-                // }
+                }
             }
         }
         
@@ -47,11 +47,11 @@ pipeline {
         stage('Backend - Build Docker Image') {
             steps {
                 // Build Docker image
-                // script {
-                //     dir('') {
+                script {
+                dir('Backend'){
                     sh "docker build -t ${DOCKER_IMAGE_BACKEND}:${DOCKER_TAG} -f Dockerfile ."
-                //     }
-                // }
+                    }
+                }
             }
         }
 

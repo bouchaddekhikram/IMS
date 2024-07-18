@@ -2,20 +2,20 @@ version: '3.3'
 services:
   mysql:
     image: mysql:latest
-    container_name: internship_management_db
+    container_name: IMS_db
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: Internship-Management-System
     ports:
       - "3306:3306"
     volumes:
-      - db_data2:/var/lib/mysql
+      - db_app_ims:/var/lib/mysql
     networks:
-      - ims-network2
+      - ims-network
 
   app:
     image: wajdiraouafi/backend-ims
-    container_name: internship_management_app
+    container_name: IMS_backend
     ports:
       - "8085:8085"
     depends_on:
@@ -25,7 +25,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: password
     networks:
-      - ims-network2
+      - ims-network
 
   adminer:
     image: adminer
@@ -33,21 +33,21 @@ services:
     ports:
       - 8081:8080
     networks:
-      - ims-network2
+      - ims-network
     
   frontend:
     image: wajdiraouafi/frontend-ims
-    container_name: internship_management_frontend
+    container_name: IMS_frontend
     ports:
       - "4200:4200"
     depends_on:
       - app
     networks:
-      - ims-network2
+      - ims-network
 
 networks:
-  ims-network2:
+  ims-network:
     driver: bridge
 
 volumes:
-  db_data2:
+  db_app_ims:

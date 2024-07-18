@@ -21,6 +21,13 @@ pipeline {
     }
 
     stages {
+
+    stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
+            }
+        }       
+
         // stage('Checkout') {
         //     steps {
         //         checkout scmGit(branches: [[name: '*/wajdi']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/Internship-Management-System']])
@@ -70,20 +77,20 @@ pipeline {
         stage('Frontend - Build') {
             steps {
                 // Build the frontend project using npm
-                // dir('Frontend') {
+                dir('Frontend') {
                     sh 'npm install'
                     sh 'npm run build'
-                // }
+                }
             }
         }
         stage('Frontend - Build Docker Image') {
             steps {
             // Build frontend Docker image
-                // script {
-                //     dir('docker/frontend') {
+                script {
+                    dir('Frontend') {
                         sh "docker build -t ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG} -f Dockerfile ."
-                //     }
-                // }
+                    }
+                }
             }
         }
 
