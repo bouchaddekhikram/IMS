@@ -3,76 +3,22 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = 'https://index.docker.io/v1/'
-        // DOCKER_IMAGE_BACKEND = 'wajdiraouafi/backend-ims'
         DOCKER_IMAGE_FRONTEND = 'wajdiraouafi/frontend-ims'
-        // DOCKER_IMAGE = 'wajdiraouafi/ims'
         DOCKER_TAG = 'latest' // You can change this to your desired tag
         DOCKER_CREDENTIALS_ID = 'docker-hub-credentials' // The ID of your Docker credentials in Jenkins
-        // DB_HOST = 'mysql' // DATABASE10
-        // DB_PORT = '3306'
-        // DB_NAME = 'Internship-Management-System'
-        // DB_USER = 'root'
-        // DB_PASSWORD = 'password'
+  
     }
     tools {
-        // jdk 'OpenJDK17'
-        // maven 'Maven3'
         nodejs 'NodeJS20'
     }
 
     stages {
 
-    stage('Checkout') {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
-            }
-        }       
-
-        // stage('Checkout') {
-        //     steps {
-        //         checkout scmGit(branches: [[name: '*/wajdi']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/Internship-Management-System']])
-        //     }
-        // }
-
-        // stage('Backend - Build') {
-        //     steps {
-        //         // Build the project using Maven
-        //         dir(''){
-        //         sh 'mvn clean package -DskipTests'
-        //         }
-        //     }
-        // }
-        
-
-        // // stage('Test') {
-        // //     steps {
-        // //         // Run tests using Maven
-        // //         sh 'mvn test'
-        // //     }
-        // // }
-
-        // stage('Backend - Build Docker Image') {
-        //     steps {
-        //         // Build Docker image
-        //         script {
-        //             dir('') {
-        //             sh "docker build -t ${DOCKER_IMAGE_BACKEND}:${DOCKER_TAG} -f docker/backend/Dockerfile ."
-        //             }
-        //         }
-        //     }
-        // }
-
-        // stage('Backend - Push Docker Image') {
-        //     steps {
-        //         // Push Docker image to registry
-        //         script {
-        //             withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //                 sh "echo \$DOCKER_PASSWORD | docker login ${DOCKER_REGISTRY} -u \$DOCKER_USERNAME --password-stdin"
-        //                 sh "docker push ${DOCKER_IMAGE_BACKEND}:${DOCKER_TAG}"
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Checkout') {
+    //         steps {
+    //             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
+    //         }
+    //     }       
 
         stage('Frontend - Build') {
             steps {
@@ -105,14 +51,19 @@ pipeline {
                 }
             }
         }
+        
+        stage('triggerBackend-ims-Job') {
+            steps {
+                build job: "Backend-ims", wait: false
+            }
+        }
+        
         // stage('Deploy') {
         //     steps {
         //         // Deploy the application using Docker Compose
         //         script {
-        //             dir('docker') {
         //                 sh 'docker-compose down'
         //                 sh 'docker-compose up -d'
-        //             }
         //         }
         //     }
         // }
