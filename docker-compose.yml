@@ -9,9 +9,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db_app_ims:/var/lib/mysql
+      - backend-ims_db_app_ims:/var/lib/mysql
     networks:
-      - ims-network
+      - backend-ims_ims-network
 
   app:
     image: wajdiraouafi/backend-ims
@@ -25,7 +25,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: password
     networks:
-      - ims-network
+      - backend-ims_ims-network
 
   adminer:
     image: adminer
@@ -33,7 +33,7 @@ services:
     ports:
       - 8081:8080
     networks:
-      - ims-network
+      - backend-ims_ims-network
     
   frontend:
     image: wajdiraouafi/frontend-ims
@@ -43,11 +43,11 @@ services:
     depends_on:
       - app
     networks:
-      - ims-network
+      - backend-ims_ims-network
 
 networks:
-  ims-network:
+  backend-ims_ims-network:
     driver: bridge
 
 volumes:
-  db_app_ims:
+  backend-ims_db_app_ims:
