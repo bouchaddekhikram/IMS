@@ -10,7 +10,7 @@ pipeline {
     tools {
         nodejs 'NodeJS20'
     }
-
+//
     stages {
     // stage('Checkout') {
     //         steps {
