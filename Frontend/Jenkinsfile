@@ -6,14 +6,12 @@ pipeline {
         DOCKER_IMAGE_FRONTEND = 'wajdiraouafi/frontend-ims'
         DOCKER_TAG = 'latest' // You can change this to your desired tag
         DOCKER_CREDENTIALS_ID = 'docker-hub-credentials' // The ID of your Docker credentials in Jenkins
-
     }
     tools {
         nodejs 'NodeJS20'
     }
 
     stages {
-
     // stage('Checkout') {
     //         steps {
     //             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
@@ -57,7 +55,6 @@ pipeline {
             }
         }
     }
-
 
     post {
         always {
