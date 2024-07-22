@@ -19,7 +19,6 @@ pipeline {
     //             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
     //         }
     //     }
-
         stage('Frontend - Build') {
             steps {
                 // Build the frontend project using npm
