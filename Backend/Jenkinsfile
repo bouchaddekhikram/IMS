@@ -54,8 +54,6 @@ pipeline {
                 }
             }
         }
-
-
         // stage('Deploy') {
         //     steps {
         //         // Deploy the application using Docker Compose
