@@ -45,9 +45,13 @@ public class Offres {
                 .filter(c -> "acceptée".equals(c.getEtatCandidature()))
                 .count();
         if (acceptedCandidatures >= nb_stagiaires) {
-            this.etatStage = "not available";
+//            this.etatStage = "not available";
+            this.etatStage = "Indisponible";
+
         } else {
-            this.etatStage = "available";
+//            this.etatStage = "available";
+            this.etatStage = "Disponible";
+
         }
     }
 }
