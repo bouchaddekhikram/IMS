@@ -90,6 +90,18 @@ public WebMvcConfigurer corsConfigurer() {
                     .allowedMethods("GET", "POST", "PUT", "DELETE","HEAD","OPTION")
                     .allowedHeaders("*")
                     .allowCredentials(true);
+
+            registry.addMapping("/api/Offre/**")
+                    .allowedOrigins("http://192.168.49.2:30100")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE","HEAD","OPTION")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
+            
+            registry.addMapping("/api/Candidature/**")
+                    .allowedOrigins("http://192.168.49.2:30100")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE","HEAD","OPTION")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
                     
         }
     };
