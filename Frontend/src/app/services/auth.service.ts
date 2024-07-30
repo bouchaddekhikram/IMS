@@ -4,7 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-const API_URL = 'http://localhost:8085/api/auth/';
+const API_URL = 'http://192.168.49.2:8085/api/auth/';
 
 @Injectable({
   providedIn: 'root'
@@ -123,7 +123,7 @@ export class AuthService {
 //   }
 
 
- 
+
 
 //   private hasToken(): boolean {
 //     return !!localStorage.getItem('token');
@@ -142,14 +142,14 @@ export class AuthService {
 //             roles: response.roles
 //           };
 //           localStorage.setItem('user', JSON.stringify(user));
-          
+
 //           this.loggedIn.next(true);
-          
+
 //         }
 //       }),
 //       catchError(this.handleError)
 //     );
-    
+
 //   }
 
 //   register(user: any): Observable<any> {
@@ -178,8 +178,8 @@ export class AuthService {
 //     location.reload();
 //     this.router.navigate(['/offres']);
 //     // console.log('Logged out'); // Debugging statement
-    
-    
+
+
 //   }
 
 //   private handleError(error: HttpErrorResponse) {
@@ -204,6 +204,6 @@ export class AuthService {
 //     const user = JSON.parse(localStorage.getItem('user') || '{}');
 //     return user.id || 0; // Return user ID or 0 if not found
 //   }
-  
+
 //   }
 
