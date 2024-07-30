@@ -54,7 +54,7 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: ['localhost:8085'], // Adjust according to your backend API's domain
-        disallowedRoutes: ['http://localhost:8085/api/auth/'] // Adjust according to your backend API's routes
+        disallowedRoutes: ['http://localhost:8085/api/auth/'] //  Adjust according to your backend API's routes
       }
     })
   ],
