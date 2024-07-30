@@ -16,7 +16,7 @@ import com.gestion.stage.repository.RefreshTokenRepository;
 
 @Service
 public class RefreshTokenService {
-  @Value("${ahlem.app.jwtRefreshExpirationMs}")
+  @Value("${IMS.app.jwtRefreshExpirationMs}")
   private Long refreshTokenDurationMs;
 
   @Autowired

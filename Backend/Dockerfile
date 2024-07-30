@@ -15,6 +15,6 @@ WORKDIR /app
 COPY --from=build /build/target/Internship-*.jar /app/
 EXPOSE 8085
 ENV DB_URL=jdbc:mysql://internship_management_db:3306/Internship-Management-System
-CMD java -jar -Dspring.datasource.url=${DB_URL} Internship-Management-System-2.1.1.jar
-ENTRYPOINT ["java", "-jar", "Internship-Management-System-2.1.1.jar"]
+CMD java -jar -Dspring.datasource.url=${DB_URL} Internship-Management-System-2.2.0.jar
+ENTRYPOINT ["java", "-jar", "Internship-Management-System-2.2.0.jar"]
 
