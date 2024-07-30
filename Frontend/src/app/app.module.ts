@@ -50,11 +50,18 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter,
+    //     allowedDomains: ['localhost:8085'], // Adjust according to your backend API's domain
+    //     disallowedRoutes: ['http://localhost:8085/api/auth/'] // Adjust according to your backend API's routes
+    //   }
+    // })
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8085'], // Adjust according to your backend API's domain
-        disallowedRoutes: ['http://localhost:8085/api/auth/'] // Adjust according to your backend API's routes
+        allowedDomains: ['192.168.49.2:8085'], // Adjust according to your backend API's domain
+        disallowedRoutes: ['http://192.168.49.2:8085/api/auth/'] // Adjust according to your backend API's routes
       }
     })
   ],
