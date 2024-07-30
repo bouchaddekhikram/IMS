@@ -7,7 +7,7 @@ import { Offres } from '../../models/offres.model.ts.js';
   providedIn: 'root'
 })
 export class OffresService {
-  private apiUrl = 'http://192.168.49.2:8085/api/Offre';
+  private apiUrl = 'http://localhost:8085/api/Offre';
 
   constructor(private http: HttpClient) { }
 

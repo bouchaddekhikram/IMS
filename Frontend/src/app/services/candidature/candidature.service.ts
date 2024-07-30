@@ -11,7 +11,7 @@ import { Offres } from '../../models/offres.model.ts';
   providedIn: 'root'
 })
 export class CandidatureService {
-  private baseUrl = 'http://192.168.49.2:8085/api/Candidature';
+  private baseUrl = 'http://localhost:8085/api/Candidature';
 
   // constructor(private http: HttpClient, private toastService: ToastService) {}
   constructor(private http: HttpClient) {}
