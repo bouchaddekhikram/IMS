@@ -22,10 +22,14 @@ import { CandidatureUpdateComponent } from './candidature/candidature-update/can
 import { ToastComponent } from './toast/toast.component';
 import { ShowCandidatComponent } from './offres/show-candidat/show-candidat.component';
 import { AuthGuard } from './auth.guard';
+// import { environment } from '../environments/environment'; 
+
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
+const API_URL = 'http://192.168.49.2:30101/api/auth/'; // Use environment API URL
 
 @NgModule({
   declarations: [
@@ -53,8 +57,14 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8085'], // Adjust according to your backend API's domain
-        disallowedRoutes: ['http://localhost:8085/api/auth/'] // Adjust according to your backend API's routes
+        // allowedDomains: ['localhost:8085'], // Adjust according to your backend API's domain
+        // disallowedRoutes: ['http://localhost:8085/api/auth/'] // Adjust according to your backend API's routes
+        allowedDomains: ['http://192.168.49.2:30101'], // Adjust according to your backend API's domain in Minikube
+        disallowedRoutes: [API_URL] // Adjust according to your backend API's routes in Minikube
+        // allowedDomains: [new URL(environment.apiAuth).hostname], // Adjust according to your backend API's domain
+        // disallowedRoutes: [new URL(environment.apiAuth).origin + '/api/auth/'] // Adjust according to your backend API's routes
+
+
       }
     })
   ],

@@ -13,34 +13,81 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: wajdiraouafi/backend-ims:latest
-        env:
-        - name: SPRING_DATASOURCE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-config
-              key: mysql-url
-        - name: SPRING_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: mysql-user
-        - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: mysql-password
-        ports:
-        - containerPort: 8085
+        - name: backend
+          image: wajdiraouafi/backend-ims:k8s-v4
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.datasource.url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: spring.datasource.username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: spring.datasource.password
+            - name: IMS_APP_JWTSECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: IMS.app.jwtSecret
+            - name: IMS_APP_JWTEXPIRATIONMS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: IMS.app.jwtExpirationMs
+            - name: IMS_APP_JWTREFRESHEXTRAIMMS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: IMS.app.jwtRefreshExpirationMs
+            - name: SPRING_MAIL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.mail.host
+            - name: SPRING_MAIL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.mail.port
+            - name: SPRING_MAIL_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.mail.username
+            - name: SPRING_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: spring.mail.password
+            - name: SPRING_MAIL_SMTP_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.mail.properties.mail.smtp.auth
+            - name: SPRING_MAIL_SMTP_STARTTLS_ENABLE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: spring.mail.properties.mail.smtp.starttls.enable
+          ports:
+            - containerPort: 8085
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-svc
 spec:
+  type: NodePort
   ports:
   - port: 8085
     targetPort: 8085
+    nodePort: 30101
   selector:
     app: backend

@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-config
-data:
-  mysql-url: jdbc:mysql://mysql-svc:3306/Internship-Management-System?useSSL=false&allowPublicKeyRetrieval=true

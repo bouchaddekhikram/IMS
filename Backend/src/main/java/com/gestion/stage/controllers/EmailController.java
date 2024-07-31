@@ -3,7 +3,7 @@ package com.gestion.stage.controllers;
 import com.gestion.stage.models.EmailDetails;
 import com.gestion.stage.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+// import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,14 +24,5 @@ public class EmailController {
         return status;
     }
 
-    // Sending email with attachment
-//    @PostMapping("/sendMailWithAttachment")
-//    public String sendMailWithAttachment(
-//            @RequestBody EmailDetails details)
-//    {
-//        String status
-//                = emailService.sendMailWithAttachment(details);
-//
-//        return status;
-//    }
+
 }

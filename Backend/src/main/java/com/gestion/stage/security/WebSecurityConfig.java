@@ -57,22 +57,79 @@ public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
 }
 
-@Bean   //temchi backend 
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().requestMatchers("/api/**").permitAll()
-                .requestMatchers("/api/auth/signin").permitAll()
-                .requestMatchers("/api/**").permitAll()
-                .requestMatchers("/api/auth/signin").permitAll()
-                .requestMatchers("/api/test/**").permitAll()
-                .requestMatchers("/api/auth/register").permitAll()
-                .anyRequest().authenticated();
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
+// @Bean   //temchi backend 
+//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         http.cors().and().csrf().disable()
+//                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                 .authorizeHttpRequests().requestMatchers("/api/**").permitAll()
+//                 .requestMatchers("/api/auth/signin").permitAll()
+//                 .requestMatchers("/api/**").permitAll()
+//                 .requestMatchers("/api/auth/signup").permitAll()
+//                 .requestMatchers("/api/test/**").permitAll()
+//                 .requestMatchers("/api/auth/register").permitAll();
+//                 // .anyRequest().authenticated();
+//         http.authenticationProvider(authenticationProvider());
+//         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//         return http.build();
+//     }
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.cors().and().csrf().disable()
+            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            .authorizeHttpRequests()
+            .requestMatchers("/api/**").permitAll()
+            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/auth/signin").permitAll()
+            .anyRequest().authenticated(); // Ensure that any other requests are authenticated
+
+    http.authenticationProvider(authenticationProvider());
+    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    return http.build();
+}
+
+// @Bean   //temchi backend 
+//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         http.cors().and().csrf().disable()
+//                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                 .authorizeHttpRequests().requestMatchers("/api/**").permitAll()
+//                 .anyRequest().authenticated();
+//         http.authenticationProvider(authenticationProvider());
+//         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//         return http.build();
+//     }
+    // @Bean
+    // public WebMvcConfigurer corsConfigurer() {
+    //     return new WebMvcConfigurer() {
+    //         @Override
+    //         public void addCorsMappings(CorsRegistry registry) {
+    //             registry.addMapping("/api/**")
+    //                     .allowedOrigins("http://localhost:4200", "http://192.168.49.2:30100")
+    //                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+    //                     .allowedHeaders("*")
+    //                     .allowCredentials(true);
+    //         }
+    //     };
+    // }
+
+
+    // @Bean
+    // public WebMvcConfigurer corsConfigurer() {
+    //     return new WebMvcConfigurer() {
+    //         @Override
+    //         public void addCorsMappings(CorsRegistry registry) {
+    //             String allowedOrigins = System.getenv("ALLOWED_ORIGINS") != null ? System.getenv("ALLOWED_ORIGINS") : "http://localhost:4200";
+    //             registry.addMapping("/api/**")
+    //                     .allowedOrigins(allowedOrigins.split(","))
+    //                     .allowedMethods("GET", "POST", "PUT", "DELETE","HEAD","OPTION")
+    //                     .allowedHeaders("*")
+    //                     .allowCredentials(true);
+    //         }
+    //     };
+    // }
+    
 
 @Bean
 public WebMvcConfigurer corsConfigurer() {

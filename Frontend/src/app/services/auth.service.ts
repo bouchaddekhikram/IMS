@@ -3,8 +3,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+// import { environment } from '../../environments/environment';
 
-const API_URL = 'http://localhost:8085/api/auth/';
+// const API_URL_auth = environment.apiAuth; // Use environment API URL
+const API_URL_auth = 'http://192.168.49.2:30101/api/auth/'; // Use environment API URL
+
+// const API_URL = 'http://localhost:8085/api/auth/';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +32,7 @@ export class AuthService {
   }
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${API_URL}signin`, credentials).pipe(
+    return this.http.post<any>(`${API_URL_auth}signin`, credentials).pipe(
       tap(response => {
         if (response && response.accessToken) {
           localStorage.setItem('token', response.accessToken);
@@ -47,7 +51,7 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    return this.http.post<any>(`${API_URL}signup`, user).pipe(
+    return this.http.post<any>(`${API_URL_auth}signup`, user).pipe(
       tap(response => {
         if (response && response.accessToken) {
           const user = {
