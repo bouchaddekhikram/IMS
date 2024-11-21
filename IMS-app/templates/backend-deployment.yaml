@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-dep
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag }}"
+        env:
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.datasource.url
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: spring.datasource.username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: spring.datasource.password
+        - name: IMS_APP_JWTSECRET
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: IMS.app.jwtSecret
+        - name: IMS_APP_JWTEXPIRATIONMS
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: IMS.app.jwtExpirationMs
+        - name: IMS_APP_JWTREFRESHEXTRAIMMS
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: IMS.app.jwtRefreshExpirationMs
+        - name: SPRING_MAIL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.mail.host
+        - name: SPRING_MAIL_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.mail.port
+        - name: SPRING_MAIL_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.mail.username
+        - name: SPRING_MAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: spring.mail.password
+        - name: SPRING_MAIL_SMTP_AUTH
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.mail.properties.mail.smtp.auth
+        - name: SPRING_MAIL_SMTP_STARTTLS_ENABLE
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: spring.mail.properties.mail.smtp.starttls.enable
+        ports:
+        - containerPort: {{ .Values.service.backendPort }}

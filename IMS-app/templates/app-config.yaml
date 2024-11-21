@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: ims-app
+    meta.helm.sh/release-namespace: default
+data:
+  spring.datasource.url: "{{ .Values.config.spring.datasource.url }}"
+  IMS.app.jwtSecret: "{{ .Values.config.IMS.app.jwtSecret }}"
+  IMS.app.jwtExpirationMs: "{{ .Values.config.IMS.app.jwtExpirationMs }}"
+  IMS.app.jwtRefreshExpirationMs: "{{ .Values.config.IMS.app.jwtRefreshExpirationMs }}"
+  spring.mail.host: "{{ .Values.config.spring.mail.host }}"
+  spring.mail.port: "{{ .Values.config.spring.mail.port }}"
+  spring.mail.username: "{{ .Values.config.spring.mail.username }}"
+  spring.mail.properties.mail.smtp.auth: "{{ .Values.config.spring.mail.properties.mail.smtp.auth }}"
+  spring.mail.properties.mail.smtp.starttls.enable: "{{ .Values.config.spring.mail.properties.mail.smtp.starttls.enable }}"
+  API_URL_auth: "{{ .Values.config.API_URL_auth }}"
+  API_URL_Off: "{{ .Values.config.API_URL_Off }}"
+  API_URL_Cand: "{{ .Values.config.API_URL_Cand }}"
