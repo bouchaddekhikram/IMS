@@ -35,7 +35,6 @@ pipeline {
                             sh """
                             sonar-scanner \
                                 -Dsonar.projectKey=frontend-ims \
-                                -Dsonar.sources=src \
                                 -Dsonar.host.url=http://localhost:9000
                             """
                         }
