@@ -33,7 +33,7 @@ pipeline {
                         dir('Frontend') {
                             // Run Sonar Scanner for the frontend
                             sh """
-                            sonar-scanner \
+                            mvn sonar:sonar \
                                 -Dsonar.projectKey=frontend-ims \
                                 -Dsonar.host.url=http://localhost:9000
                             """
