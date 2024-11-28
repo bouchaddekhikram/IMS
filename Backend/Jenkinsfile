@@ -66,8 +66,7 @@ pipeline {
                             sh """
                             mvn sonar:sonar \
                                 -Dsonar.projectKey=backend-ims \
-                                -Dsonar.host.url=http://localhost:9000 \
-                                -Dsonar.login=sonar-token
+                                -Dsonar.host.url=http://localhost:9000
                             """
                         }
                     }
