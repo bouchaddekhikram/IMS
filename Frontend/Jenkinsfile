@@ -26,22 +26,7 @@ pipeline {
                 }
             }
         }
-        stage('Frontend - SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQube') { 
-                        dir('Frontend') {
-                            // Run Sonar Scanner for the frontend
-                            sh """
-                            mvn sonar:sonar \
-                                -Dsonar.projectKey=frontend-ims \
-                                -Dsonar.host.url=http://localhost:9000
-                            """
-                        }
-                    }
-                }
-            }
-        }
+        
         stage('Frontend - Build Docker Image') {
             steps {
             // Build frontend Docker image
@@ -60,6 +45,22 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "echo \$DOCKER_PASSWORD | docker login ${DOCKER_REGISTRY} -u \$DOCKER_USERNAME --password-stdin"
                         sh "docker push ${DOCKER_IMAGE_FRONTEND}:${DOCKER_TAG}"
+                    }
+                }
+            }
+        }
+        stage('Frontend - SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') { 
+                        dir('Frontend') {
+                            // Run Sonar Scanner for the frontend
+                            sh """
+                            mvn sonar:sonar \
+                                -Dsonar.projectKey=frontend-ims \
+                                -Dsonar.host.url=http://localhost:9000
+                            """
+                        }
                     }
                 }
             }
