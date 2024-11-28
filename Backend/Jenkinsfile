@@ -57,17 +57,26 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         // Deploy the application using Docker Compose
-        //         script {
-        //             dir('docker') {
-        //                 sh 'docker-compose down'
-        //                 sh 'docker-compose up -d'
-        //             }
-        //         }
-        //     }
-        // }
+
+        stage('Backend - SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') { 
+                        dir('Backend') {
+                            sh """
+                            mvn sonar:sonar \
+                                -Dsonar.projectKey=backend-ims \
+                                -Dsonar.host.url=http://localhost:9000 \
+                                -Dsonar.login=sonar-token
+                            """
+                        }
+                    }
+                }
+            }
+        }
+
+
+        
         stage('Cleanup') {
             steps {
                 script {
