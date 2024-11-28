@@ -65,14 +65,15 @@ pipeline {
         //         }
         //     }
         // }
-    }
-    stage('Cleanup') {
-        steps {
-            script {
-                sh 'docker system prune -f'
+        stage('Cleanup') {
+            steps {
+                script {
+                    sh 'docker system prune -f'
+                }
             }
         }
     }
+        
     post {
         always {
             cleanWs()   // Clean up workspace after the build
