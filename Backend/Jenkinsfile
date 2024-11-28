@@ -21,7 +21,9 @@ pipeline {
            stage('Checkout') {
             steps {
                 //checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WajdiRaouafi/IMS']])
-                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bouchaddekhikram/IMS']])
+
+
+                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://bouchaddekhikram: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@github.com/bouchaddekhikram/IMS.git']])
             }
         }
 
