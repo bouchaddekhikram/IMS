@@ -26,6 +26,23 @@ pipeline {
                 }
             }
         }
+        stage('Frontend - SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') { 
+                        dir('Frontend') {
+                            // Run Sonar Scanner for the frontend
+                            sh """
+                            sonar-scanner \
+                                -Dsonar.projectKey=frontend-ims \
+                                -Dsonar.sources=src \
+                                -Dsonar.host.url=http://localhost:9000
+                            """
+                        }
+                    }
+                }
+            }
+        }
         stage('Frontend - Build Docker Image') {
             steps {
             // Build frontend Docker image
@@ -54,6 +71,8 @@ pipeline {
                 build job: "Backend-ims", wait: false
             }
         }
+
+       
     }
 
     post {
